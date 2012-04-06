@@ -2,15 +2,15 @@ module Forem
   module Admin
     class GroupsController < BaseController
       def index
-        @groups = Group.all
+        @groups = Forem::Group.all
       end
 
       def new
-        @group = Group.new
+        @group = Forem::Group.new
       end
 
       def create
-        @group = Group.new(params[:group])
+        @group = Forem::Group.new(params[:group])
         if @group.save
           flash[:notice] = t("forem.admin.group.created")
           redirect_to [:admin, @group]
@@ -21,11 +21,11 @@ module Forem
       end
 
       def show
-        @group = Group.find(params[:id])
+        @group = Forem::Group.find(params[:id])
       end
 
       def destroy
-        @group = Group.find(params[:id])
+        @group = Forem::Group.find(params[:id])
         @group.destroy
         flash[:notice] = t("forem.admin.group.deleted")
         redirect_to admin_groups_path
